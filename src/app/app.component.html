@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search..." >
+  </div>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">FirstName</th>
+        <th scope="col">lastname</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Address</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ collabcontent }}</td>
+    </tr>
+      <tr *ngFor="let user of userRecords">
+        <td>{{user._meta.url}}</td>
+        <td>{{user.collabcontent.additionalproperty.create.create.fields[0].name}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.phoneNumber}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.city}}</td>
+        <td>{{user.state}}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
