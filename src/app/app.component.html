@@ -1,367 +1,45 @@
 <div class="container mt-5">
-  <div class="form-group">
+ <!--  <div class="form-group">
     <input type="text" class="form-control" placeholder="Search..." >
-  </div>
+  </div> -->
 
-<!--   <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">FirstName</th>
-        <th scope="col">lastname</th>
-        <th scope="col">Mobile</th>
-        <th scope="col">Email</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Address</th>
-        <th scope="col">City</th>
-        <th scope="col">State</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ collabcontent }}</td>
-    </tr>
-      <tr *ngFor="let user of userRecords">
-        <td>{{user._meta.url}}</td>
-        <td>{{user.collabcontent.additionalproperty.create.create.fields[0].name}}</td>
-        <td>{{user.lastName}}</td>
-        <td>{{user.phoneNumber}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.gender}}</td>
-        <td>{{user.address}}</td>
-        <td>{{user.city}}</td>
-        <td>{{user.state}}</td>
-
-      </tr>
-    </tbody>
-  </table> -->
-
-
-  <form (ngSubmit)="fetchCollabcontent(f)" #f="ngForm">
+  <form (ngSubmit)="createPost(f)" #f="ngForm">
     <span class="help-block msg" *ngIf="success == true">{{ "Added Successfully!!"  }}</span>
+    <span class="help-block msg" *ngIf="deleteMsg == true">{{ "Deleted Successfully!!"  }}</span>
+    <span class="help-block msg" *ngIf="updateMsg == true">{{ "Updated Successfully!!"  }}</span>
     <span class="help-block errmsg" *ngIf="msg == true">{{ "Failed to add Try again!"  }}</span>
 
-  <div class="form-group col-xs-12">
-    <label for="company_type">company_type</label>
+    <div class="form-group col-xs-12">
+    <label for="title">Title</label>
     <div class="input-group mb-3">
       <input 
-      type="text" 
+      type="text"
       class="form-control" 
-      id="company_type" 
-      placeholder="company_type" 
-      name="company_type"
+      id="title" 
+      placeholder="Title" 
+      name="title"
       ngModel
-      #company_type="ngModel"
+      #title="ngModel"
       />
     </div>
-    <span class="help-block errmsg" *ngIf="!company_type.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-
-  <div class="form-group col-xs-12">
-    <label for="segment_id">segment_id</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="segment_id" 
-      placeholder="segment_idDescription" 
-      name="segment_id"
-      ngModel
-      #segment_id="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!segment_id.valid">{{
+    <span class="help-block errmsg" *ngIf="!title.valid">{{
       "Please Enter a valid Data!" 
     }}</span>
   </div>
   <div class="form-group col-xs-12">
-    <label for="industry_category">industry_category</label>
+    <label for="body">Description</label>
     <div class="input-group mb-3">
       <input 
       type="text" 
       class="form-control" 
-      id="industry_category" 
-      placeholder="Descrindustry_category" 
-      name="industry_category"
+      id="body" 
+      placeholder="Description" 
+      name="body"
       ngModel
-      #industry_category="ngModel"
+      #body="ngModel"
       />
     </div>
-    <span class="help-block errmsg" *ngIf="!industry_category.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="industry_subcategory">industry_subcategory</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="industry_subcategory" 
-      placeholder="Descriptindustry_subcategory" 
-      name="industry_subcategory"
-      ngModel
-      #industry_subcategory="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!industry_subcategory.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="service_type">service_type</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="service_type" 
-      placeholder="service_type" 
-      name="service_type"
-      ngModel
-      #service_type="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!service_type.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="revenue_range">revenue_range</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="revenue_range" 
-      placeholder="Drevenue_range" 
-      name="revenue_range"
-      ngModel
-      #revenue_range="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!revenue_range.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="employee_range">employee_range</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="employee_range" 
-      placeholder="Deemployee_range" 
-      name="employee_range"
-      ngModel
-      #employee_range="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!employee_range.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="years_in_business">years_in_business</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="years_in_business" 
-      placeholder="Descryears_in_business" 
-      name="years_in_business"
-      ngModel
-      #years_in_business="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!years_in_business.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="lifestage">lifestage</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="lifestage" 
-      placeholder="lifestage" 
-      name="lifestage"
-      ngModel
-      #lifestage="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!lifestage.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="country_code">country_code</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="country_code" 
-      placeholder="country_code" 
-      name="country_code"
-      ngModel
-      #country_code="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!country_code.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="active">active</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="active" 
-      placeholder="active" 
-      name="active"
-      ngModel
-      #active="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!active.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="name">name</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="name" 
-      placeholder="name" 
-      name="name"
-      ngModel
-      #name="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!name.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="website_url">website_url</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="website_url" 
-      placeholder="website_url" 
-      name="website_url"
-      ngModel
-      #website_url="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!website_url.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="address_line1">address_line1</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="address_line1" 
-      placeholder="Daddress_line1" 
-      name="address_line1"
-      ngModel
-      #address_line1="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!address_line1.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="address_line2">address_line2</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="address_line2" 
-      placeholder="Daddress_line2" 
-      name="address_line2"
-      ngModel
-      #address_line2="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!address_line2.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="city">city</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="city" 
-      placeholder="city" 
-      name="city"
-      ngModel
-      #city="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!city.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="state">state</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="state" 
-      placeholder="state" 
-      name="state"
-      ngModel
-      #state="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!state.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="country">country</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="country" 
-      placeholder="country" 
-      name="country"
-      ngModel
-      #country="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!country.valid">{{
-      "Please Enter a valid Data!" 
-    }}</span>
-  </div>
-  <div class="form-group col-xs-12">
-    <label for="zip">zip</label>
-    <div class="input-group mb-3">
-      <input 
-      type="text" 
-      class="form-control" 
-      id="zip" 
-      placeholder="zip" 
-      name="zip"
-      ngModel
-      #zip="ngModel"
-      />
-    </div>
-    <span class="help-block errmsg" *ngIf="!zip.valid">{{
+    <span class="help-block errmsg" *ngIf="!body.valid">{{
       "Please Enter a valid Data!" 
     }}</span>
   </div>
@@ -369,6 +47,35 @@
   <button type="submit" class="btn btn-sm" [disabled]="!f.valid">
     {{ "Save" }}
   </button>
+  <button type="button" (click)="updatePost(f)" class="btn btn-sm" [disabled]="!f.valid">
+    {{ "Update" }}
+  </button>
+  <button type="button" (click)="getPost()" class="btn btn-sm">
+    {{ "Display" }}
+  </button>
+  <button type="button" (click)="deletePost()" class="btn btn-sm">
+    {{ "Delete" }}
+  </button>
   
 </form>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">UserID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let post of allPosts">
+      <td>{{post.id}}</td>
+      <td>{{post.title}}</td>
+      <td>{{post.body}}</td>
+      <td>{{post.userId}}</td>
+    </tr>
+  </tbody>
+</table>
+
 </div>
